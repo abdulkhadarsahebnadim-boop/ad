@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andar Bahar - Start Game | Reddy Anna Kossu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>Reddy Anna Kossu</h1>
+                </div>
+                
+                <div class="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="index.html#home" class="nav-link">Home</a></li>
+                        <li><a href="index.html#game-rules" class="nav-link">Game Rules</a></li>
+                        <li><a href="https://wa.me/918686886632" target="_blank" class="nav-link">Contact</a></li>
+                        <li><a href="login.html" class="nav-link">Login</a></li>
+                        <li><a href="signup.html" class="nav-link">SignUp</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-controls">
+                    <div class="language-selector">
+                        <select id="languageSelect" class="language-dropdown">
+                            <option value="en">English</option>
+                            <option value="hi">हिंदी</option>
+                            <option value="te">తెలుగు</option>
+                        </select>
+                    </div>
+                    
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Start Game Section 
+    <section class="start-game-section">
+        <div class="container">
+            <div class="start-game-container">
+                 Game Header 
+                <div class="game-header">
+                    <button class="back-btn" onclick="window.location.href='game.html'">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to Room</span>
+                    </button>
+                    <h2>Andar Bahar - Live Game</h2>
+                    <div class="game-status">
+                        <div class="live-indicator">
+                            <div class="live-dot"></div>
+                            <span>LIVE</span>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Live Stream Box -->
+                <div class="live-stream-box">
+                    <div class="stream-container">
+                        <div class="stream-video">
+                            <video id="liveStream" autoplay muted loop playsinline>
+                                <source src="hero images/uhd_30fps.mp4" type="video/mp4">
+                            </video>
+                            <div class="stream-overlay"></div>
+                            <div class="stream-controls">
+                                <button class="play-pause-btn" id="playPauseBtn">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <div class="stream-info">
+                                    <span class="live-badge">LIVE</span>
+                                    <span class="viewer-count">1,234 viewers</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Betting Interface -->
+                <div class="betting-interface">
+                    <div class="betting-container">
+                        <!-- Timer -->
+                        <div class="game-timer">
+                            <i class="fas fa-clock"></i>
+                            <span id="gameTimer">30</span>s
+                        </div>
+
+                        <!-- Main Betting Areas -->
+                        <div class="main-betting-areas">
+                            <div class="betting-zone andar-zone" id="andarZone">
+                                <div class="zone-content1">
+                                    <div class="zone-text1">
+                                        <div class="zone-label1">ANDAR
+                                        1:1</div>
+                                    </div>
+                                    <!-- <div class="zone-card1">
+                                        <div class="playing-card">
+                                            <div class="card-top">9</div>
+                                            <div class="card-suit">♥</div>
+                                            <div class="card-center">
+                                                <div class="card-hearts">
+                                                    <span>♥</span><span>♥</span><span>♥</span>
+                                                    <span>♥</span><span>♥</span><span>♥</span>
+                                                    <span>♥</span><span>♥</span><span>♥</span>
+                                                </div>
+                                            </div>
+                                            <div class="card-bottom">
+                                                <div class="card-suit">♥</div>
+                                                <div class="card-number">9</div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                   
+                                </div>
+                                <img src="coins/Select Coins.png" alt="Andar Image" class="andar-zone-image">
+                                <img src="cards/D7.png" alt="Andar Image 2" class="andar-zone-image-2">
+                                <div class="bet-amount" id="andarBet">₹0</div>
+                            </div>
+
+                            <div class="central-card-area">
+                                <img src="cards/DJ.png" alt="Central Card Image" class="central-card-image">
+                            </div>
+
+                            <div class="betting-zone bahar-zone" id="baharZone">
+                                <div class="zone-text2">
+                                        <div class="zone-label2">BAHAR 
+                                        1:1</div>
+                                    </div>
+                                <!-- <div class="zone-content2">
+                                    <div class="zone-card2">
+                                        <div class="playing-card">
+                                            <div class="card-top">9</div>
+                                            <div class="card-suit">♥</div>
+                                            <div class="card-center">
+                                                <div class="card-hearts">
+                                                    <span>♥</span><span>♥</span><span>♥</span>
+                                                    <span>♥</span><span>♥</span><span>♥</span>
+                                                    <span>♥</span><span>♥</span><span>♥</span>
+                                                </div>
+                                            </div>
+                                            <div class="card-bottom">
+                                                <div class="card-suit">♥</div>
+                                                <div class="card-number">9</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div> -->
+                                <img src="coins/Select Coins.png" alt="Bahar Image" class="bahar-zone-image">
+                                <img src="cards/DQ.png" alt="Bahar Image 2" class="bahar-zone-image-2">
+                                <div class="bet-amount" id="baharBet">₹0</div>
+                            </div>
+                        </div>
+
+                        <!-- Chip Selection -->
+                        
+
+                    </div>
+                </div>
+
+                <!-- Game Controls -->
+                 <div class="coins-container">
+                    <div class="chip-selection-section">
+                            <!-- <h3 class="chip-selection-title">Select Coins</h3> -->
+                            <div class="chip-selection">
+                                <!--<button class="chip-btn" data-amount="100000">
+                                    <img src="coins/100000.png" alt="₹100000" class="chip-image">
+                                    <span class="chip-amount">₹100000</span>
+                                </button>
+                                <button class="chip-btn" data-amount="50000">
+                                    <img src="coins/50000.png" alt="₹50000" class="chip-image">
+                                    <span class="chip-amount">₹50000</span>
+                                </button>
+                                <button class="chip-btn" data-amount="40000">
+                                    <img src="coins/40000.png" alt="₹40000" class="chip-image">
+                                    <span class="chip-amount">₹40000</span>
+                                </button>
+                                <button class="chip-btn" data-amount="30000">
+                                    <img src="coins/30000.png" alt="₹30000" class="chip-image">
+                                    <span class="chip-amount">₹30000</span>
+                                </button> -->
+                                <button class="chip-btn" data-amount="20000" onclick="updateshowcoins(event)">
+                                    <img src="coins/20000.png" alt="₹20000" class="chip-image">
+                                    <span class="chip-amount">₹20000</span>
+                                </button>
+                                <button class="chip-btn" data-amount="10000" onclick="updateshowcoins(event)">
+                                    <img src="coins/10000.png" alt="₹10000" class="chip-image">
+                                    <span class="chip-amount">₹10000</span>
+                                </button>
+                                <button class="chip-btn" data-amount="5000" onclick="updateshowcoins(event)">
+                                    <img src="coins/5000.png" alt="₹5000" class="chip-image">
+                                    <span class="chip-amount">₹5000</span>
+                                </button>
+                                    <button class="chip-btn" data-amount="2500" onclick="updateshowcoins(event)">
+                                    <img src="coins/2500.png" alt="₹2500" class="chip-image">
+                                    <span class="chip-amount">₹2500</span>
+                                </button>
+                            </div>
+                        </div>
+                <div class="game-controls">
+                    <button class="control-btn" onclick="showHistory()">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </button>
+                    <button class="control-btn" onclick="undoBet()">
+                        <i class="fas fa-undo"></i>
+                        <span>Undo</span>
+                    </button>
+                    <button class="control-btn" onclick="rebetAndar()">
+                        <i class="fas fa-redo"></i>
+                        <span>Rebet</span>
+                    </button>
+                    
+                    
+                    <img src="coins/Select Coins.png" alt="" class="select-coins" onclick="showcoins()">
+                    
+                </div>
+                </div>
+
+                <!-- Recent Results -->
+                <div class="recent-results">
+                    <div class="result-chip red">2</div>
+                    <div class="result-chip blue">9</div>
+                    <div class="result-chip blue">3</div>
+                    <div class="result-chip red">K</div>
+                    <div class="result-chip red">6</div>
+                    <div class="result-chip blue">9</div>
+                    <div class="result-chip red">6</div>
+                    <div class="result-chip blue">10</div>
+                    <div class="result-chip red">6</div>
+                    <div class="result-chip red">5</div>
+                </div>
+
+                <!-- Player Info -->
+                <div class="player-info">
+                    <div class="info-left">
+                        <div class="info-item">
+                            <span class="label">ID</span>
+                            <span class="value">1308544430</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Balance</span>
+                            <span class="value balance">₹50,00,423.90</span>
+                        </div>
+                    </div>
+                    <div class="info-right">
+                        <div class="info-item">
+                            <span class="label">Total Bet</span>
+                            <span class="value">₹ 0 USD</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Last Win</span>
+                            <span class="value">₹ 0 USD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- WhatsApp Float Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/918686886632" target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let selectedChip = 0;
+        let andarBet = 0;
+        let baharBet = 0;
+        let gameTimer = 30;
+        let timerInterval;
+        let playerBalance = 5000423.90;
+        let betHistory = [];
+        let bettingOpen = true;
+
+        // Initialize game
+        document.addEventListener('DOMContentLoaded', function() {
+            startGameTimer();
+            setupChipSelection();
+            setupBettingZones();
+            setupLiveStream();
+        });
+
+        function startGameTimer() {
+            timerInterval = setInterval(() => {
+                gameTimer--;
+                document.getElementById('gameTimer').textContent = gameTimer;
+                
+                if (gameTimer <= 0) {
+                    bettingOpen = false;
+                    clearInterval(timerInterval);
+                    showNotification('Betting closed! Game round starting...', 'warning');
+                    // Game round ends, process bets
+                    processGameRound();
+                }
+            }, 1000);
+        }
+
+        function setupChipSelection() {
+            const chipButtons = document.querySelectorAll('.chip-btn');
+            chipButtons.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    // Remove active class from all chips
+                    chipButtons.forEach(c => c.classList.remove('active'));
+                    // Add active class to selected chip
+                    chip.classList.add('active');
+                    selectedChip = parseInt(chip.dataset.amount);
+                });
+            });
+        }
+
+        function setupBettingZones() {
+            const andarZone = document.getElementById('andarZone');
+            const baharZone = document.getElementById('baharZone');
+
+            andarZone.addEventListener('click', () => {
+                if (!bettingOpen) {
+                    showNotification('Betting is closed! Wait for next round.', 'error');
+                    return;
+                }
+                
+                if (selectedChip > 0) {
+                    if (playerBalance >= selectedChip) {
+                        // Save previous state for undo
+                        betHistory.push({
+                            andarBet: andarBet,
+                            baharBet: baharBet,
+                            balance: playerBalance
+                        });
+                        
+                        andarBet += selectedChip;
+                        playerBalance -= selectedChip;
+                        updateBetDisplay();
+                        updateBalanceDisplay();
+                        showNotification(`Added ₹${selectedChip} to Andar`, 'success');
+                    } else {
+                        showNotification('Insufficient balance!', 'error');
+                    }
+                } else {
+                    showNotification('Please select a chip amount first', 'error');
+                }
+            });
+
+            baharZone.addEventListener('click', () => {
+                if (!bettingOpen) {
+                    showNotification('Betting is closed! Wait for next round.', 'error');
+                    return;
+                }
+                
+                if (selectedChip > 0) {
+                    if (playerBalance >= selectedChip) {
+                        // Save previous state for undo
+                        betHistory.push({
+                            andarBet: andarBet,
+                            baharBet: baharBet,
+                            balance: playerBalance
+                        });
+                        
+                        baharBet += selectedChip;
+                        playerBalance -= selectedChip;
+                        updateBetDisplay();
+                        updateBalanceDisplay();
+                        showNotification(`Added ₹${selectedChip} to Bahar`, 'success');
+                    } else {
+                        showNotification('Insufficient balance!', 'error');
+                    }
+                } else {
+                    showNotification('Please select a chip amount first', 'error');
+                }
+            });
+        }
+
+        function updateBetDisplay() {
+            document.getElementById('andarBet').textContent = `₹${andarBet}`;
+            document.getElementById('baharBet').textContent = `₹${baharBet}`;
+        }
+
+        function updateBalanceDisplay() {
+            document.querySelector('.balance').textContent = `₹${playerBalance.toFixed(2)}`;
+        }
+
+        function processGameRound() {
+            showNotification('Game round ended! Processing results...', 'info');
+            // Reset timer for next round
+            setTimeout(() => {
+                gameTimer = 30;
+                bettingOpen = true;
+                document.getElementById('gameTimer').textContent = gameTimer;
+                startGameTimer();
+                // Reset bets for new round
+                andarBet = 0;
+                baharBet = 0;
+                betHistory = [];
+                updateBetDisplay();
+            }, 3000);
+        }
+
+        function showHistory() {
+            showNotification('Game history will be displayed here', 'info');
+        }
+
+        function undoBet() {
+            if (betHistory.length > 0) {
+                const lastState = betHistory.pop();
+                andarBet = lastState.andarBet;
+                baharBet = lastState.baharBet;
+                playerBalance = lastState.balance;
+                updateBetDisplay();
+                updateBalanceDisplay();
+                showNotification('Last bet undone', 'success');
+            } else {
+                showNotification('No bet to undo', 'error');
+            }
+        }
+
+        function rebetAndar() {
+            if (andarBet > 0) {
+                showNotification('Rebetting Andar amount', 'info');
+            } else {
+                showNotification('No previous Andar bet to rebet', 'error');
+            }
+        }
+
+        function rebetBahar() {
+            if (baharBet > 0) {
+                showNotification('Rebetting Bahar amount', 'info');
+            } else {
+                showNotification('No previous Bahar bet to rebet', 'error');
+            }
+        }
+
+        function setupLiveStream() {
+            const video = document.getElementById('liveStream');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const playIcon = playPauseBtn.querySelector('i');
+            let isPlaying = true;
+
+            // Play/Pause functionality
+            playPauseBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    video.pause();
+                    playIcon.className = 'fas fa-play';
+                    isPlaying = false;
+                } else {
+                    video.play();
+                    playIcon.className = 'fas fa-pause';
+                    isPlaying = true;
+                }
+            });
+
+            // Video event listeners
+            video.addEventListener('play', () => {
+                playIcon.className = 'fas fa-pause';
+                isPlaying = true;
+            });
+
+            video.addEventListener('pause', () => {
+                playIcon.className = 'fas fa-play';
+                isPlaying = false;
+            });
+
+            // Auto-hide controls after 3 seconds
+            let controlsTimeout;
+            const streamControls = document.querySelector('.stream-controls');
+            
+            function hideControls() {
+                streamControls.style.opacity = '0';
+            }
+
+            function showControls() {
+                streamControls.style.opacity = '1';
+                clearTimeout(controlsTimeout);
+                controlsTimeout = setTimeout(hideControls, 3000);
+            }
+
+            // Show controls on mouse move
+            document.querySelector('.stream-video').addEventListener('mousemove', showControls);
+            document.querySelector('.stream-video').addEventListener('mouseleave', hideControls);
+            
+            // Initial hide after 3 seconds
+            controlsTimeout = setTimeout(hideControls, 3000);
+        }
+
+        function showNotification(message, type = 'info') {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            
+            container.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    container.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+    </script>
+</body>
+</html>
