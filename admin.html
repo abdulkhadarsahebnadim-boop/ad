@@ -244,6 +244,59 @@
             background: linear-gradient(45deg, #28a745, #20c997);
         }
 
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.winner {
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
+            color: #1a1a1a;
+        }
+
+        .status-badge.loser {
+            background: linear-gradient(45deg, #ff4444, #cc0000);
+            color: white;
+        }
+
+        .status-badge.deposit {
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
+            color: #1a1a1a;
+        }
+
+        .status-badge.withdrawal {
+            background: linear-gradient(45deg, #ff6b6b, #ff4444);
+            color: white;
+        }
+
+        .status-badge.completed {
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
+            color: #1a1a1a;
+        }
+
+        .status-badge.pending {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1a1a1a;
+        }
+
+        .status-badge.failed {
+            background: linear-gradient(45deg, #ff4444, #cc0000);
+            color: white;
+        }
+
+        .detail-value {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            min-height: 20px;
+        }
+
         .notification {
             position: fixed;
             top: 20px;
@@ -395,9 +448,9 @@
             <button class="admin-nav-btn" onclick="showSection('content')">Content Management</button>
             <button class="admin-nav-btn" onclick="showSection('users')">User Management</button>
             <button class="admin-nav-btn" onclick="showSection('transactions')">Deposit/Withdraw</button>
-            <button class="admin-nav-btn" onclick="showSection('livestream')">Live Stream</button>
+            <button class="admin-nav-btn" onclick="showSection('todayWL')">Today's W/L</button>
+            <button class="admin-nav-btn" onclick="showSection('todayDW')">Today's D/W</button>
             <button class="admin-nav-btn" onclick="showSection('settings')">Settings</button>
-            <a href="index.html" class="admin-nav-btn">Back to Website</a>
         </nav>
 
         <!-- Dashboard Section -->
@@ -717,104 +770,325 @@
             </div>
         </div>
 
-        <!-- Live Stream Section -->
-        <div id="livestream" class="admin-section">
-            <h2 class="section-title">Live Stream Management</h2>
+        <!-- Today's W/L Section -->
+        <div id="todayWL" class="admin-section">
+            <h2 class="section-title">Today's Winners & Losers</h2>
             
-            <div class="form-group">
-                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Stream Configuration</h3>
-                <form id="streamForm">
-                    <div class="form-group">
-                        <label class="form-label" for="streamUrl">Live Stream URL</label>
-                        <input type="url" id="streamUrl" class="form-input" placeholder="https://example.com/live/stream" value="https://www.youtube.com/embed/dQw4w9WgXcQ">
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label" for="streamTitle">Stream Title</label>
-                            <input type="text" id="streamTitle" class="form-input" placeholder="Enter stream title" value="Andar Bahar Live Game">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="streamStatus">Stream Status</label>
-                            <select id="streamStatus" class="form-input">
-                                <option value="live">Live</option>
-                                <option value="offline">Offline</option>
-                                <option value="maintenance">Maintenance</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="streamDescription">Stream Description</label>
-                        <textarea id="streamDescription" class="form-input form-textarea" placeholder="Enter stream description">Watch live Andar Bahar games with real-time betting and instant results. Join thousands of players in the most exciting card game experience.</textarea>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label" for="streamQuality">Stream Quality</label>
-                            <select id="streamQuality" class="form-input">
-                                <option value="720p">720p HD</option>
-                                <option value="1080p">1080p Full HD</option>
-                                <option value="480p">480p SD</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="streamDelay">Stream Delay (seconds)</label>
-                            <input type="number" id="streamDelay" class="form-input" value="5" placeholder="Enter delay in seconds">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="backupStreamUrl">Backup Stream URL (Optional)</label>
-                        <input type="url" id="backupStreamUrl" class="form-input" placeholder="https://backup.example.com/live/stream">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="streamEmbedCode">Embed Code (HTML/PHP)</label>
-                        <textarea id="streamEmbedCode" class="form-input form-textarea" placeholder="Paste your embed code here (HTML iframe, PHP code, etc.)" rows="4"></textarea>
-                    </div>
-                    
-                    <button type="button" class="save-btn" onclick="saveStreamSettings()">Save Stream Settings</button>
-                </form>
-            </div>
-
-            <div class="form-group">
-                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Stream Preview</h3>
-                <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; padding: 20px; text-align: center;">
-                    <iframe id="streamPreview" width="100%" height="300" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>
-                    <p style="color: #ffffff; font-family: 'Poppins', sans-serif; margin-top: 10px;">Live Stream Preview (URL)</p>
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">₹2,45,680</div>
+                    <div class="stat-label">Total Winnings Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">₹1,89,340</div>
+                    <div class="stat-label">Total Losses Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">156</div>
+                    <div class="stat-label">Total Winners</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">89</div>
+                    <div class="stat-label">Total Losers</div>
                 </div>
             </div>
 
+            <!-- Filters and Search -->
             <div class="form-group">
-                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Embed Code Preview</h3>
-                <div style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; padding: 20px;">
-                    <div id="embedCodePreview" style="min-height: 200px; background: rgba(255, 255, 255, 0.1); border-radius: 5px; padding: 15px; color: #ffffff; font-family: 'Poppins', sans-serif;">
-                        <p style="text-align: center; opacity: 0.7;">Embed code preview will appear here</p>
+                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Filters & Search</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="wlFilter">Filter by Status</label>
+                        <select id="wlFilter" class="form-input" onchange="filterWL()">
+                            <option value="all">All Players</option>
+                            <option value="winners">Winners Only</option>
+                            <option value="losers">Losers Only</option>
+                        </select>
                     </div>
-                    <p style="color: #ffffff; font-family: 'Poppins', sans-serif; margin-top: 10px; text-align: center;">Custom Embed Code Preview</p>
+                    <div class="form-group">
+                        <label class="form-label" for="wlAmountFilter">Filter by Amount</label>
+                        <select id="wlAmountFilter" class="form-input" onchange="filterWL()">
+                            <option value="all">All Amounts</option>
+                            <option value="high">High Amounts (₹10,000+)</option>
+                            <option value="medium">Medium Amounts (₹1,000-₹10,000)</option>
+                            <option value="low">Low Amounts (₹1-₹1,000)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="wlSort">Sort by Amount</label>
+                        <select id="wlSort" class="form-input" onchange="sortWL()">
+                            <option value="none">No Sorting</option>
+                            <option value="high-to-low">High to Low</option>
+                            <option value="low-to-high">Low to High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="wlSearch">Search Player</label>
+                        <input type="text" id="wlSearch" class="form-input" placeholder="Search by username or ID" onkeyup="searchWL()">
+                    </div>
                 </div>
             </div>
 
+            <!-- Winners & Losers Table -->
             <div class="form-group">
-                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Stream Statistics</h3>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">1,247</div>
-                        <div class="stat-label">Current Viewers</div>
+                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Today's Game Results</h3>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table" id="wlTable">
+                        <thead>
+                            <tr>
+                                <th>Player ID</th>
+                                <th>Username</th>
+                                <th>Game Type</th>
+                                <th>Bet Amount</th>
+                                <th>Win/Loss Amount</th>
+                                <th>Status</th>
+                                <th>Time</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>001</td>
+                                <td>PlayerOne</td>
+                                <td>Andar Bahar</td>
+                                <td>₹5,000</td>
+                                <td style="color: #00ff88;">+₹5,000</td>
+                                <td><span class="status-badge winner">Winner</span></td>
+                                <td>10:30 AM</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewPlayerDetails('001')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>LuckyPlayer</td>
+                                <td>Andar Bahar</td>
+                                <td>₹2,500</td>
+                                <td style="color: #00ff88;">+₹2,500</td>
+                                <td><span class="status-badge winner">Winner</span></td>
+                                <td>10:25 AM</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewPlayerDetails('002')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>003</td>
+                                <td>RiskTaker</td>
+                                <td>Andar Bahar</td>
+                                <td>₹8,000</td>
+                                <td style="color: #ff4444;">-₹8,000</td>
+                                <td><span class="status-badge loser">Loser</span></td>
+                                <td>10:20 AM</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewPlayerDetails('003')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>004</td>
+                                <td>BigWinner</td>
+                                <td>Andar Bahar</td>
+                                <td>₹15,000</td>
+                                <td style="color: #00ff88;">+₹15,000</td>
+                                <td><span class="status-badge winner">Winner</span></td>
+                                <td>10:15 AM</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewPlayerDetails('004')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>005</td>
+                                <td>SmallBettor</td>
+                                <td>Andar Bahar</td>
+                                <td>₹500</td>
+                                <td style="color: #ff4444;">-₹500</td>
+                                <td><span class="status-badge loser">Loser</span></td>
+                                <td>10:10 AM</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewPlayerDetails('005')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>006</td>
+                                <td>ConsistentPlayer</td>
+                                <td>Andar Bahar</td>
+                                <td>₹3,200</td>
+                                <td style="color: #00ff88;">+₹3,200</td>
+                                <td><span class="status-badge winner">Winner</span></td>
+                                <td>10:05 AM</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewPlayerDetails('006')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>007</td>
+                                <td>HighRoller</td>
+                                <td>Andar Bahar</td>
+                                <td>₹25,000</td>
+                                <td style="color: #ff4444;">-₹25,000</td>
+                                <td><span class="status-badge loser">Loser</span></td>
+                                <td>10:00 AM</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewPlayerDetails('007')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>008</td>
+                                <td>LuckyCharm</td>
+                                <td>Andar Bahar</td>
+                                <td>₹1,800</td>
+                                <td style="color: #00ff88;">+₹1,800</td>
+                                <td><span class="status-badge winner">Winner</span></td>
+                                <td>09:55 AM</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewPlayerDetails('008')">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Today's D/W Section -->
+        <div id="todayDW" class="admin-section">
+            <h2 class="section-title">Today's Deposits & Withdrawals</h2>
+            
+            <!-- Overview Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">₹5,67,890</div>
+                    <div class="stat-label">Total Deposits Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">₹2,34,560</div>
+                    <div class="stat-label">Total Withdrawals Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">₹3,33,330</div>
+                    <div class="stat-label">Net Balance</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">89</div>
+                    <div class="stat-label">Total Transactions</div>
+                </div>
+            </div>
+
+            <!-- Date Filters -->
+            <div class="form-group">
+                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Date Filters</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="dwDateFilter">Quick Date Filter</label>
+                        <select id="dwDateFilter" class="form-input" onchange="filterByDate()">
+                            <option value="today">Today</option>
+                            <option value="this-week">This Week</option>
+                            <option value="this-month">This Month</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">5,678</div>
-                        <div class="stat-label">Total Views Today</div>
+                    <div class="form-group" id="fromDateGroup" style="display: none;">
+                        <label class="form-label" for="dwFromDate">From Date</label>
+                        <input type="date" id="dwFromDate" class="form-input" onchange="filterByDate()">
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">98.5%</div>
-                        <div class="stat-label">Stream Uptime</div>
+                    <div class="form-group" id="toDateGroup" style="display: none;">
+                        <label class="form-label" for="dwToDate">To Date</label>
+                        <input type="date" id="dwToDate" class="form-input" onchange="filterByDate()">
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">2.3s</div>
-                        <div class="stat-label">Average Latency</div>
-                    </div>
+                </div>
+            </div>
+
+            <!-- Date-wise Summary Table -->
+            <div class="form-group">
+                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Date-wise Financial Summary</h3>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table" id="dwTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Deposits</th>
+                                <th>Withdrawals</th>
+                                <th>Balance</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-01-15 (Today)</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹1,80,000</td>
+                                <td style="color: #ff4444; font-weight: bold;">₹65,000</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹1,15,000</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewDateDetails('2024-01-15')">View Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-14</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹2,45,000</td>
+                                <td style="color: #ff4444; font-weight: bold;">₹1,20,000</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹1,25,000</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewDateDetails('2024-01-14')">View Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-13</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹1,95,000</td>
+                                <td style="color: #ff4444; font-weight: bold;">₹85,000</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹1,10,000</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewDateDetails('2024-01-13')">View Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-12</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹3,20,000</td>
+                                <td style="color: #ff4444; font-weight: bold;">₹1,50,000</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹1,70,000</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewDateDetails('2024-01-12')">View Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-11</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹1,60,000</td>
+                                <td style="color: #ff4444; font-weight: bold;">₹95,000</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹65,000</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewDateDetails('2024-01-11')">View Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-10</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹2,80,000</td>
+                                <td style="color: #ff4444; font-weight: bold;">₹1,10,000</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹1,70,000</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewDateDetails('2024-01-10')">View Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-09</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹2,15,000</td>
+                                <td style="color: #ff4444; font-weight: bold;">₹1,30,000</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹85,000</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewDateDetails('2024-01-09')">View Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-08</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹1,90,000</td>
+                                <td style="color: #ff4444; font-weight: bold;">₹75,000</td>
+                                <td style="color: #00ff88; font-weight: bold;">₹1,15,000</td>
+                                <td>
+                                    <button class="action-btn" onclick="viewDateDetails('2024-01-08')">View Details</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -824,29 +1098,12 @@
             <h2 class="section-title">System Settings</h2>
             
             <form id="settingsForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label" for="maintenanceMode">Maintenance Mode</label>
-                        <select id="maintenanceMode" class="form-input">
-                            <option value="off">Off</option>
-                            <option value="on">On</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="maxBetAmount">Max Bet Amount (₹)</label>
-                        <input type="number" id="maxBetAmount" class="form-input" value="10000" placeholder="Enter max bet amount">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label" for="minBetAmount">Min Bet Amount (₹)</label>
-                        <input type="number" id="minBetAmount" class="form-input" value="10" placeholder="Enter min bet amount">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="gameTimer">Game Timer (seconds)</label>
-                        <input type="number" id="gameTimer" class="form-input" value="30" placeholder="Enter game timer">
-                    </div>
+                <div class="form-group">
+                    <label class="form-label" for="maintenanceMode">Maintenance Mode</label>
+                    <select id="maintenanceMode" class="form-input">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -861,6 +1118,17 @@
                         <option value="weekly">Weekly</option>
                         <option value="monthly">Monthly</option>
                     </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="referralCommission">Referral Commission (%)</label>
+                        <input type="number" id="referralCommission" class="form-input" value="5" placeholder="Enter referral commission percentage" min="0" max="100" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="depositBonus">Deposit Bonus (%)</label>
+                        <input type="number" id="depositBonus" class="form-input" value="5" placeholder="Enter deposit bonus percentage" min="0" max="100" step="0.1">
+                    </div>
                 </div>
 
                 <button type="button" class="save-btn" onclick="saveSettings()">Save Settings</button>
@@ -1010,20 +1278,18 @@
         // Save settings
         function saveSettings() {
             const maintenanceMode = document.getElementById('maintenanceMode').value;
-            const maxBetAmount = document.getElementById('maxBetAmount').value;
-            const minBetAmount = document.getElementById('minBetAmount').value;
-            const gameTimer = document.getElementById('gameTimer').value;
             const adminEmail = document.getElementById('adminEmail').value;
             const backupFrequency = document.getElementById('backupFrequency').value;
+            const referralCommission = document.getElementById('referralCommission').value;
+            const depositBonus = document.getElementById('depositBonus').value;
             
             // Here you would typically send data to server
             console.log('Saving settings:', {
                 maintenanceMode,
-                maxBetAmount,
-                minBetAmount,
-                gameTimer,
                 adminEmail,
-                backupFrequency
+                backupFrequency,
+                referralCommission,
+                depositBonus
             });
             
             showNotification('Settings saved successfully!', 'success');
@@ -1032,6 +1298,325 @@
         // Export data
         function exportData() {
             showNotification('Data export started! You will receive an email shortly.', 'success');
+        }
+
+        // Filter W/L data
+        function filterWL() {
+            const statusFilter = document.getElementById('wlFilter').value;
+            const amountFilter = document.getElementById('wlAmountFilter').value;
+            const table = document.getElementById('wlTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const statusCell = row.cells[5];
+                const amountCell = row.cells[3];
+                
+                let showRow = true;
+
+                // Filter by status
+                if (statusFilter !== 'all') {
+                    const statusBadge = statusCell.querySelector('.status-badge');
+                    const isWinner = statusBadge.classList.contains('winner');
+                    if (statusFilter === 'winners' && !isWinner) showRow = false;
+                    if (statusFilter === 'losers' && isWinner) showRow = false;
+                }
+
+                // Filter by amount
+                if (amountFilter !== 'all') {
+                    const amountText = amountCell.textContent.replace('₹', '').replace(',', '');
+                    const amount = parseInt(amountText);
+                    
+                    if (amountFilter === 'high' && amount < 10000) showRow = false;
+                    if (amountFilter === 'medium' && (amount < 1000 || amount >= 10000)) showRow = false;
+                    if (amountFilter === 'low' && amount >= 1000) showRow = false;
+                }
+
+                row.style.display = showRow ? '' : 'none';
+            }
+        }
+
+        // Search W/L data
+        function searchWL() {
+            const searchTerm = document.getElementById('wlSearch').value.toLowerCase();
+            const table = document.getElementById('wlTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const playerId = row.cells[0].textContent.toLowerCase();
+                const username = row.cells[1].textContent.toLowerCase();
+                
+                if (playerId.includes(searchTerm) || username.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        }
+
+        // Sort W/L data
+        function sortWL() {
+            const sortType = document.getElementById('wlSort').value;
+            const table = document.getElementById('wlTable');
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rows = Array.from(tbody.getElementsByTagName('tr'));
+
+            if (sortType === 'none') {
+                // Reset to original order
+                const originalOrder = ['001', '002', '003', '004', '005', '006', '007', '008'];
+                rows.sort((a, b) => {
+                    const aId = a.cells[0].textContent;
+                    const bId = b.cells[0].textContent;
+                    return originalOrder.indexOf(aId) - originalOrder.indexOf(bId);
+                });
+            } else {
+                // Sort by bet amount
+                rows.sort((a, b) => {
+                    const aAmount = parseInt(a.cells[3].textContent.replace('₹', '').replace(',', ''));
+                    const bAmount = parseInt(b.cells[3].textContent.replace('₹', '').replace(',', ''));
+                    
+                    if (sortType === 'high-to-low') {
+                        return bAmount - aAmount;
+                    } else if (sortType === 'low-to-high') {
+                        return aAmount - bAmount;
+                    }
+                    return 0;
+                });
+            }
+
+            // Re-append sorted rows
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        // View player details
+        function viewPlayerDetails(playerId) {
+            // Sample player data - in real implementation, this would come from database
+            const playerData = {
+                '001': {
+                    id: '001',
+                    username: 'PlayerOne',
+                    email: 'playerone@email.com',
+                    phone: '+91 9876543210',
+                    balance: '₹15,000',
+                    totalGames: 45,
+                    totalWins: 28,
+                    totalLosses: 17,
+                    winRate: '62.2%',
+                    totalWinnings: '₹1,25,000',
+                    totalLosses: '₹85,000',
+                    netProfit: '₹40,000',
+                    joinDate: '2024-01-01',
+                    lastActive: '2024-01-15 10:30 AM',
+                    status: 'Active'
+                },
+                '002': {
+                    id: '002',
+                    username: 'LuckyPlayer',
+                    email: 'luckyplayer@email.com',
+                    phone: '+91 9876543211',
+                    balance: '₹8,500',
+                    totalGames: 32,
+                    totalWins: 20,
+                    totalLosses: 12,
+                    winRate: '62.5%',
+                    totalWinnings: '₹75,000',
+                    totalLosses: '₹45,000',
+                    netProfit: '₹30,000',
+                    joinDate: '2024-01-05',
+                    lastActive: '2024-01-15 10:25 AM',
+                    status: 'Active'
+                }
+                // Add more sample data as needed
+            };
+
+            const player = playerData[playerId] || {
+                id: playerId,
+                username: 'Unknown Player',
+                email: 'N/A',
+                phone: 'N/A',
+                balance: '₹0',
+                totalGames: 0,
+                totalWins: 0,
+                totalLosses: 0,
+                winRate: '0%',
+                totalWinnings: '₹0',
+                totalLosses: '₹0',
+                netProfit: '₹0',
+                joinDate: 'N/A',
+                lastActive: 'N/A',
+                status: 'Unknown'
+            };
+
+            // Create and show modal
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin: 0;">Player Details - ${player.username}</h3>
+                        <button class="close-modal" onclick="closePlayerModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Player ID</label>
+                                <div class="detail-value">${player.id}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Username</label>
+                                <div class="detail-value">${player.username}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <div class="detail-value">${player.email}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Phone</label>
+                                <div class="detail-value">${player.phone}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Current Balance</label>
+                                <div class="detail-value" style="color: #00ff88; font-weight: bold;">${player.balance}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Status</label>
+                                <div class="detail-value">
+                                    <span class="status-badge ${player.status.toLowerCase()}">${player.status}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin: 20px 0 10px 0;">Game Statistics</h4>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Total Games</label>
+                                <div class="detail-value">${player.totalGames}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Win Rate</label>
+                                <div class="detail-value" style="color: #00ff88; font-weight: bold;">${player.winRate}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Total Wins</label>
+                                <div class="detail-value" style="color: #00ff88;">${player.totalWins}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Total Losses</label>
+                                <div class="detail-value" style="color: #ff4444;">${player.totalLosses}</div>
+                            </div>
+                        </div>
+                        
+                        <h4 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin: 20px 0 10px 0;">Financial Summary</h4>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Total Winnings</label>
+                                <div class="detail-value" style="color: #00ff88; font-weight: bold;">${player.totalWinnings}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Total Losses</label>
+                                <div class="detail-value" style="color: #ff4444; font-weight: bold;">${player.totalLosses}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Net Profit/Loss</label>
+                                <div class="detail-value" style="color: #00ff88; font-weight: bold; font-size: 1.2rem;">${player.netProfit}</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Join Date</label>
+                                <div class="detail-value">${player.joinDate}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Last Active</label>
+                            <div class="detail-value">${player.lastActive}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            modal.style.display = 'flex';
+        }
+
+        // Close player modal
+        function closePlayerModal() {
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // Filter by date
+        function filterByDate() {
+            const dateFilter = document.getElementById('dwDateFilter').value;
+            const fromDateGroup = document.getElementById('fromDateGroup');
+            const toDateGroup = document.getElementById('toDateGroup');
+            const table = document.getElementById('dwTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            // Show/hide custom date inputs
+            if (dateFilter === 'custom') {
+                fromDateGroup.style.display = 'block';
+                toDateGroup.style.display = 'block';
+            } else {
+                fromDateGroup.style.display = 'none';
+                toDateGroup.style.display = 'none';
+            }
+
+            // Filter rows based on date selection
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const dateCell = row.cells[0].textContent;
+                let showRow = true;
+
+                if (dateFilter === 'today') {
+                    // Show only today's data
+                    if (!dateCell.includes('Today')) showRow = false;
+                } else if (dateFilter === 'this-week') {
+                    // Show this week's data (last 7 days)
+                    const today = new Date();
+                    const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+                    const rowDate = new Date(dateCell.split(' ')[0]);
+                    if (rowDate < weekAgo) showRow = false;
+                } else if (dateFilter === 'this-month') {
+                    // Show this month's data
+                    const today = new Date();
+                    const monthAgo = new Date(today.getFullYear(), today.getMonth(), 1);
+                    const rowDate = new Date(dateCell.split(' ')[0]);
+                    if (rowDate < monthAgo) showRow = false;
+                } else if (dateFilter === 'custom') {
+                    // Show custom date range
+                    const fromDate = document.getElementById('dwFromDate').value;
+                    const toDate = document.getElementById('dwToDate').value;
+                    const rowDate = dateCell.split(' ')[0];
+                    
+                    if (fromDate && rowDate < fromDate) showRow = false;
+                    if (toDate && rowDate > toDate) showRow = false;
+                }
+
+                row.style.display = showRow ? '' : 'none';
+            }
+        }
+
+        // View date details
+        function viewDateDetails(date) {
+            showNotification(`Viewing detailed transactions for ${date}`, 'info');
+            // Here you would typically open a modal with detailed transactions for that date
         }
 
         // Process transaction
@@ -1061,47 +1646,6 @@
             document.getElementById('transactionForm').reset();
         }
 
-        // Save stream settings
-        function saveStreamSettings() {
-            const streamUrl = document.getElementById('streamUrl').value;
-            const streamTitle = document.getElementById('streamTitle').value;
-            const streamStatus = document.getElementById('streamStatus').value;
-            const streamDescription = document.getElementById('streamDescription').value;
-            const streamQuality = document.getElementById('streamQuality').value;
-            const streamDelay = document.getElementById('streamDelay').value;
-            const backupStreamUrl = document.getElementById('backupStreamUrl').value;
-            const streamEmbedCode = document.getElementById('streamEmbedCode').value;
-            
-            if (!streamUrl && !streamEmbedCode) {
-                showNotification('Please enter either a stream URL or embed code!', 'error');
-                return;
-            }
-            
-            console.log('Saving stream settings:', {
-                streamUrl,
-                streamTitle,
-                streamStatus,
-                streamDescription,
-                streamQuality,
-                streamDelay,
-                backupStreamUrl,
-                streamEmbedCode
-            });
-            
-            // Update URL preview if URL is provided
-            if (streamUrl) {
-                const preview = document.getElementById('streamPreview');
-                preview.src = streamUrl;
-            }
-            
-            // Update embed code preview if embed code is provided
-            if (streamEmbedCode) {
-                const embedPreview = document.getElementById('embedCodePreview');
-                embedPreview.innerHTML = streamEmbedCode;
-            }
-            
-            showNotification('Stream settings saved successfully!', 'success');
-        }
 
         // View transaction details
         function viewTransaction(transactionId) {

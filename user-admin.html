@@ -313,6 +313,14 @@
             color: #1a1a1a;
         }
 
+        .withdraw-details {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
         @media (max-width: 768px) {
             .user-admin-container {
                 padding: 10px;
@@ -322,21 +330,163 @@
                 font-size: 2rem;
             }
 
+            .user-admin-subtitle {
+                font-size: 1rem;
+            }
+
             .form-row {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
 
             .user-nav {
                 flex-direction: column;
                 align-items: center;
+                gap: 10px;
             }
 
             .user-nav-btn {
-                width: 200px;
+                width: 100%;
+                max-width: 300px;
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
 
             .deposit-withdraw-section {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .stat-card {
+                padding: 20px 15px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .user-section {
+                padding: 20px 15px;
+            }
+
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .user-table {
+                min-width: 600px;
+            }
+
+            .user-table th,
+            .user-table td {
+                padding: 10px 8px;
+                font-size: 0.9rem;
+            }
+
+            .action-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                margin: 2px;
+            }
+
+            .quick-amounts {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .quick-amount-btn {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+
+            .withdraw-details {
+                padding: 15px;
+                margin: 10px 0;
+            }
+
+            .save-btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+
+            .notification {
+                right: 10px;
+                left: 10px;
+                transform: translateY(-100px);
+            }
+
+            .notification.show {
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .user-admin-container {
+                padding: 5px;
+            }
+
+            .user-admin-title {
+                font-size: 1.8rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .user-nav-btn {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+
+            .form-input {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+
+            .user-table {
+                min-width: 500px;
+            }
+
+            .user-table th,
+            .user-table td {
+                padding: 8px 6px;
+                font-size: 0.8rem;
+            }
+
+            .action-btn {
+                padding: 5px 10px;
+                font-size: 0.7rem;
+            }
+
+            .quick-amounts {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .user-section {
+                padding: 15px 10px;
             }
         }
     </style>
@@ -355,6 +505,7 @@
             <button class="user-nav-btn" onclick="showSection('deposit')">Deposit</button>
             <button class="user-nav-btn" onclick="showSection('withdraw')">Withdraw</button>
             <button class="user-nav-btn" onclick="showSection('games')">Game History</button>
+            <button class="user-nav-btn" onclick="showSection('referral')">Referral</button>
             <a href="index.html" class="user-nav-btn">Back to Website</a>
         </nav>
 
@@ -433,6 +584,25 @@
                         <label class="form-label" for="userState">State</label>
                         <input type="text" id="userState" class="form-input" value="Maharashtra" placeholder="Enter state">
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin: 30px 0 20px 0; text-align: center;">Change Password</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" class="form-input" placeholder="Enter current password">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" class="form-input" placeholder="Enter new password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm new password">
+                    </div>
+                    <button type="button" class="save-btn" onclick="changePassword()" style="width: auto; margin: 0 auto; display: block;">Change Password</button>
                 </div>
 
                 <button type="button" class="save-btn" onclick="saveProfile()">Update Profile</button>
@@ -563,7 +733,10 @@
                 <div class="withdraw-card">
                     <h3>Available Balance</h3>
                     <div class="stat-number" style="font-size: 3rem; margin: 20px 0;">₹5,000</div>
-                    <p style="color: #ffffff; text-align: center;">Maximum withdrawal: ₹4,500</p>
+                    <p style="color: #ffffff; text-align: center;">
+                        Maximum withdrawal: 
+                        <span onclick="setMaxWithdrawAmount()" style="color: #ffd700; cursor: pointer; text-decoration: underline; font-weight: bold;">₹4,500</span>
+                    </p>
                 </div>
                 
                 <div class="withdraw-card">
@@ -576,11 +749,60 @@
                         
                         <div class="form-group">
                             <label class="form-label" for="withdrawMethod">Withdrawal Method</label>
-                            <select id="withdrawMethod" class="form-input">
+                            <select id="withdrawMethod" class="form-input" onchange="toggleWithdrawDetails()">
                                 <option value="bank">Bank Transfer</option>
                                 <option value="upi">UPI</option>
                                 <option value="wallet">Digital Wallet</option>
                             </select>
+                        </div>
+                        
+                        <!-- Bank Transfer Details -->
+                        <div id="bankDetails" class="withdraw-details">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="bankName">Bank Name</label>
+                                    <input type="text" id="bankName" class="form-input" placeholder="Enter bank name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="accountNumber">Account Number</label>
+                                    <input type="text" id="accountNumber" class="form-input" placeholder="Enter account number">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="ifscCode">IFSC Code</label>
+                                    <input type="text" id="ifscCode" class="form-input" placeholder="Enter IFSC code">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="accountHolderName">Account Holder Name</label>
+                                    <input type="text" id="accountHolderName" class="form-input" placeholder="Enter account holder name">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- UPI Details -->
+                        <div id="upiDetails" class="withdraw-details" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label" for="upiId">UPI ID</label>
+                                <input type="text" id="upiId" class="form-input" placeholder="Enter UPI ID (e.g., name@paytm)">
+                            </div>
+                        </div>
+                        
+                        <!-- Digital Wallet Details -->
+                        <div id="walletDetails" class="withdraw-details" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label" for="walletType">Wallet Type</label>
+                                <select id="walletType" class="form-input">
+                                    <option value="paytm">Paytm</option>
+                                    <option value="phonepe">PhonePe</option>
+                                    <option value="gpay">Google Pay</option>
+                                    <option value="amazonpay">Amazon Pay</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="walletNumber">Wallet Number</label>
+                                <input type="text" id="walletNumber" class="form-input" placeholder="Enter wallet number">
+                            </div>
                         </div>
                         
                         <div class="form-group">
@@ -637,6 +859,144 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- Referral Section -->
+        <div id="referral" class="user-section">
+            <h2 class="section-title">Referral Program</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Total Referrals</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Deposited</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">₹24,000</div>
+                    <div class="stat-label">Total Deposits</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">₹600</div>
+                    <div class="stat-label">Total Commission</div>
+                </div>
+            </div>
+
+            <div class="referral-section">
+                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px; text-align: center;">Your Referral Link</h3>
+                <div style="background: rgba(255, 215, 0, 0.1); border: 2px solid #ffd700; border-radius: 15px; padding: 30px; text-align: center; margin-bottom: 30px;">
+                    <input type="text" id="referralLink" class="form-input" value="https://reddyannakossu.com/register?ref=RAJESH001" readonly style="margin-bottom: 20px;">
+                    <div style="margin-bottom: 20px;">
+                        <button class="save-btn" onclick="copyReferralLink()" style="width: auto; margin: 0 10px;">Copy Link</button>
+                        <button class="save-btn" onclick="shareViaWhatsApp()" style="width: auto; margin: 0 10px;">Share on WhatsApp</button>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                        <button class="action-btn" onclick="shareOnFacebook()">Share on Facebook</button>
+                        <button class="action-btn" onclick="shareOnTwitter()">Share on Twitter</button>
+                        <button class="action-btn" onclick="shareOnTelegram()">Share on Telegram</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="referral-section">
+                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px; text-align: center;">How It Works</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">1️⃣</div>
+                        <h4 style="color: #ffd700; font-family: 'Poppins', sans-serif;">Share Your Link</h4>
+                        <p style="color: #ffffff; font-family: 'Poppins', sans-serif;">Share your unique referral link with friends and family</p>
+                    </div>
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">2️⃣</div>
+                        <h4 style="color: #ffd700; font-family: 'Poppins', sans-serif;">They Sign Up</h4>
+                        <p style="color: #ffffff; font-family: 'Poppins', sans-serif;">Your friends register using your referral link</p>
+                    </div>
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">3️⃣</div>
+                        <h4 style="color: #ffd700; font-family: 'Poppins', sans-serif;">They Deposit</h4>
+                        <p style="color: #ffffff; font-family: 'Poppins', sans-serif;">Your friends make their first deposit</p>
+                    </div>
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">4️⃣</div>
+                        <h4 style="color: #ffd700; font-family: 'Poppins', sans-serif;">You Earn</h4>
+                        <p style="color: #ffffff; font-family: 'Poppins', sans-serif;">Get ₹200 commission when they deposit</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="referral-section">
+                <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin-bottom: 20px; text-align: center;">Referral History</h3>
+                <div class="table-container">
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>Referral ID</th>
+                                <th>Friend Name</th>
+                                <th>Signup Date</th>
+                                <th>First Deposit</th>
+                                <th>First Deposit Amount</th>
+                                <th>Total Deposits</th>
+                                <th>Status</th>
+                                <th>Commission</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#REF001</td>
+                                <td>Priya Sharma</td>
+                                <td>2024-01-15</td>
+                                <td>2024-01-16</td>
+                                <td style="color: #28a745; font-weight: bold;">₹5,000</td>
+                                <td style="color: #28a745; font-weight: bold;">₹12,500</td>
+                                <td>Paid</td>
+                                <td style="color: #28a745; font-weight: bold;">₹200</td>
+                            </tr>
+                            <tr>
+                                <td>#REF002</td>
+                                <td>Amit Singh</td>
+                                <td>2024-01-10</td>
+                                <td>2024-01-12</td>
+                                <td style="color: #28a745; font-weight: bold;">₹2,500</td>
+                                <td style="color: #28a745; font-weight: bold;">₹8,000</td>
+                                <td>Paid</td>
+                                <td style="color: #28a745; font-weight: bold;">₹200</td>
+                            </tr>
+                            <tr>
+                                <td>#REF003</td>
+                                <td>Sneha Patel</td>
+                                <td>2024-01-08</td>
+                                <td>2024-01-09</td>
+                                <td style="color: #28a745; font-weight: bold;">₹1,000</td>
+                                <td style="color: #28a745; font-weight: bold;">₹3,500</td>
+                                <td>Paid</td>
+                                <td style="color: #28a745; font-weight: bold;">₹200</td>
+                            </tr>
+                            <tr>
+                                <td>#REF004</td>
+                                <td>Rohit Kumar</td>
+                                <td>2024-01-05</td>
+                                <td>-</td>
+                                <td style="color: #ffc107; font-weight: bold;">₹0</td>
+                                <td style="color: #ffc107; font-weight: bold;">₹0</td>
+                                <td>No Deposit</td>
+                                <td style="color: #ffc107; font-weight: bold;">₹0</td>
+                            </tr>
+                            <tr>
+                                <td>#REF005</td>
+                                <td>Kavya Reddy</td>
+                                <td>2024-01-20</td>
+                                <td>-</td>
+                                <td style="color: #ffc107; font-weight: bold;">₹0</td>
+                                <td style="color: #ffc107; font-weight: bold;">₹0</td>
+                                <td>No Deposit</td>
+                                <td style="color: #ffc107; font-weight: bold;">₹0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -700,6 +1060,48 @@
             showNotification('Profile updated successfully!', 'success');
         }
 
+        // Change password
+        function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                showNotification('Please fill in all password fields!', 'error');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showNotification('New passwords do not match!', 'error');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                showNotification('New password must be at least 6 characters long!', 'error');
+                return;
+            }
+            
+            // Demo validation (in real app, validate current password with server)
+            const validCurrentPassword = 'rajesh123'; // Demo current password
+            
+            if (currentPassword !== validCurrentPassword) {
+                showNotification('Current password is incorrect!', 'error');
+                return;
+            }
+            
+            console.log('Changing password:', {
+                currentPassword,
+                newPassword
+            });
+            
+            showNotification('Password changed successfully!', 'success');
+            
+            // Clear password fields
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
         // Select amount for deposit
         function selectAmount(amount) {
             document.getElementById('depositAmount').value = amount;
@@ -720,15 +1122,59 @@
                 return;
             }
             
+            // Create WhatsApp message with deposit details
+            const whatsappMessage = `Deposit Request
+
+Amount: ₹${amount}
+Payment Method: ${method}
+
+Please process my deposit request.`;
+
+            // WhatsApp number (you can change this to your actual WhatsApp number)
+            const whatsappNumber = '8686886632';
+            
+            // Create WhatsApp URL
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+            
             console.log('Processing deposit:', { amount, method });
-            showNotification(`Deposit request of ₹${amount} submitted successfully!`, 'success');
+            showNotification(`Redirecting to WhatsApp for deposit of ₹${amount}...`, 'success');
             
-            // Clear form
-            document.getElementById('depositForm').reset();
+            // Clear form after a short delay
+            setTimeout(() => {
+                document.getElementById('depositForm').reset();
+                
+                // Clear selected buttons
+                const buttons = document.querySelectorAll('.quick-amount-btn');
+                buttons.forEach(btn => btn.classList.remove('selected'));
+            }, 1000);
+        }
+
+        // Set maximum withdrawal amount
+        function setMaxWithdrawAmount() {
+            document.getElementById('withdrawAmount').value = '4500';
+            showNotification('Maximum withdrawal amount (₹4,500) selected!', 'success');
+        }
+
+        // Toggle withdraw details based on method
+        function toggleWithdrawDetails() {
+            const method = document.getElementById('withdrawMethod').value;
             
-            // Clear selected buttons
-            const buttons = document.querySelectorAll('.quick-amount-btn');
-            buttons.forEach(btn => btn.classList.remove('selected'));
+            // Hide all detail sections
+            document.getElementById('bankDetails').style.display = 'none';
+            document.getElementById('upiDetails').style.display = 'none';
+            document.getElementById('walletDetails').style.display = 'none';
+            
+            // Show relevant detail section
+            if (method === 'bank') {
+                document.getElementById('bankDetails').style.display = 'block';
+            } else if (method === 'upi') {
+                document.getElementById('upiDetails').style.display = 'block';
+            } else if (method === 'wallet') {
+                document.getElementById('walletDetails').style.display = 'block';
+            }
         }
 
         // Process withdrawal
@@ -742,11 +1188,75 @@
                 return;
             }
             
-            console.log('Processing withdrawal:', { amount, method, note });
-            showNotification(`Withdrawal request of ₹${amount} submitted successfully!`, 'success');
+            // Get method-specific details
+            let methodDetails = '';
+            if (method === 'bank') {
+                const bankName = document.getElementById('bankName').value;
+                const accountNumber = document.getElementById('accountNumber').value;
+                const ifscCode = document.getElementById('ifscCode').value;
+                const accountHolderName = document.getElementById('accountHolderName').value;
+                
+                if (!bankName || !accountNumber || !ifscCode || !accountHolderName) {
+                    showNotification('Please fill in all bank details!', 'error');
+                    return;
+                }
+                
+                methodDetails = `Bank Name: ${bankName}
+Account Number: ${accountNumber}
+IFSC Code: ${ifscCode}
+Account Holder: ${accountHolderName}`;
+            } else if (method === 'upi') {
+                const upiId = document.getElementById('upiId').value;
+                
+                if (!upiId) {
+                    showNotification('Please enter UPI ID!', 'error');
+                    return;
+                }
+                
+                methodDetails = `UPI ID: ${upiId}`;
+            } else if (method === 'wallet') {
+                const walletType = document.getElementById('walletType').value;
+                const walletNumber = document.getElementById('walletNumber').value;
+                
+                if (!walletNumber) {
+                    showNotification('Please enter wallet number!', 'error');
+                    return;
+                }
+                
+                methodDetails = `Wallet Type: ${walletType}
+Wallet Number: ${walletNumber}`;
+            }
             
-            // Clear form
-            document.getElementById('withdrawForm').reset();
+            // Create WhatsApp message with withdrawal details
+            const whatsappMessage = `Withdrawal Request
+
+Amount: ₹${amount}
+Withdrawal Method: ${method}
+
+${methodDetails}
+
+Note: ${note || 'No additional notes'}
+
+Please process my withdrawal request.`;
+
+            // WhatsApp number (same as deposit)
+            const whatsappNumber = '8686886632';
+            
+            // Create WhatsApp URL
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+            
+            console.log('Processing withdrawal:', { amount, method, note, methodDetails });
+            showNotification(`Redirecting to WhatsApp for withdrawal of ₹${amount}...`, 'success');
+            
+            // Clear form after a short delay
+            setTimeout(() => {
+                document.getElementById('withdrawForm').reset();
+                // Reset details visibility
+                toggleWithdrawDetails();
+            }, 1000);
         }
 
         // Filter user transactions
@@ -786,7 +1296,199 @@
 
         // View user transaction
         function viewUserTransaction(transactionId) {
-            showNotification(`Viewing transaction ${transactionId} details`, 'info');
+            // Sample transaction data for user view
+            const userTransactionData = {
+                'TXN001': {
+                    id: 'TXN001',
+                    type: 'Deposit',
+                    amount: '₹5,000',
+                    method: 'UPI',
+                    status: 'Completed',
+                    date: '2024-01-15',
+                    time: '14:30:25',
+                    reference: 'UPI123456789',
+                    note: 'UPI payment from PhonePe',
+                    details: {
+                        upiId: 'rajesh.kumar@paytm',
+                        upiApp: 'PhonePe',
+                        transactionId: 'TXN123456789'
+                    }
+                },
+                'TXN002': {
+                    id: 'TXN002',
+                    type: 'Withdraw',
+                    amount: '₹2,500',
+                    method: 'Bank Transfer',
+                    status: 'Pending',
+                    date: '2024-01-15',
+                    time: '10:15:30',
+                    reference: 'BANK987654321',
+                    note: 'Withdrawal to HDFC Bank',
+                    details: {
+                        bankName: 'HDFC Bank',
+                        accountNumber: '1234567890',
+                        ifscCode: 'HDFC0001234'
+                    }
+                },
+                'TXN003': {
+                    id: 'TXN003',
+                    type: 'Game',
+                    amount: '₹500',
+                    method: 'Game Bet',
+                    status: 'Completed',
+                    date: '2024-01-14',
+                    time: '16:45:12',
+                    reference: 'GAME789123456',
+                    note: 'Andar Bahar game bet',
+                    details: {
+                        gameType: 'Andar Bahar',
+                        betOn: 'Andar',
+                        result: 'Won',
+                        winAmount: '₹500'
+                    }
+                }
+            };
+
+            const transaction = userTransactionData[transactionId];
+            if (transaction) {
+                let detailsHtml = `
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                        <h4 style="color: #ffd700; margin-bottom: 15px;">Transaction Details</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div><strong>Transaction ID:</strong> ${transaction.id}</div>
+                            <div><strong>Type:</strong> ${transaction.type}</div>
+                            <div><strong>Amount:</strong> ${transaction.amount}</div>
+                            <div><strong>Method:</strong> ${transaction.method}</div>
+                            <div><strong>Status:</strong> ${transaction.status}</div>
+                            <div><strong>Date:</strong> ${transaction.date}</div>
+                            <div><strong>Time:</strong> ${transaction.time}</div>
+                            <div><strong>Reference:</strong> ${transaction.reference}</div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <strong>Note:</strong> ${transaction.note}
+                        </div>
+                    </div>
+                `;
+
+                // Add method-specific details
+                if (transaction.method === 'UPI') {
+                    detailsHtml += `
+                        <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="color: #ffd700; margin-bottom: 15px;">UPI Details</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div><strong>UPI ID:</strong> ${transaction.details.upiId}</div>
+                                <div><strong>UPI App:</strong> ${transaction.details.upiApp}</div>
+                                <div><strong>Transaction ID:</strong> ${transaction.details.transactionId}</div>
+                            </div>
+                        </div>
+                    `;
+                } else if (transaction.method === 'Bank Transfer') {
+                    detailsHtml += `
+                        <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="color: #ffd700; margin-bottom: 15px;">Bank Details</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div><strong>Bank Name:</strong> ${transaction.details.bankName}</div>
+                                <div><strong>Account Number:</strong> ${transaction.details.accountNumber}</div>
+                                <div><strong>IFSC Code:</strong> ${transaction.details.ifscCode}</div>
+                            </div>
+                        </div>
+                    `;
+                } else if (transaction.method === 'Game Bet') {
+                    detailsHtml += `
+                        <div style="background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="color: #ffd700; margin-bottom: 15px;">Game Details</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div><strong>Game Type:</strong> ${transaction.details.gameType}</div>
+                                <div><strong>Bet On:</strong> ${transaction.details.betOn}</div>
+                                <div><strong>Result:</strong> ${transaction.details.result}</div>
+                                <div><strong>Win Amount:</strong> ${transaction.details.winAmount}</div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Show modal with transaction details
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.8);
+                    z-index: 2000;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                `;
+                
+                modal.innerHTML = `
+                    <div style="background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 50%, #8b0000 100%); border-radius: 15px; padding: 0; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; border-bottom: 2px solid #ffd700; background: rgba(0, 0, 0, 0.3);">
+                            <h3 style="color: #ffd700; font-family: 'Poppins', sans-serif; margin: 0;">Transaction Details</h3>
+                            <button onclick="this.closest('.modal-overlay').remove()" style="background: none; border: none; color: #ffd700; font-size: 2rem; cursor: pointer; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">&times;</button>
+                        </div>
+                        <div style="padding: 30px;">
+                            ${detailsHtml}
+                        </div>
+                    </div>
+                `;
+                
+                modal.className = 'modal-overlay';
+                document.body.appendChild(modal);
+                
+                // Close modal when clicking outside
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.remove();
+                    }
+                });
+            }
+        }
+
+        // Copy referral link
+        function copyReferralLink() {
+            const referralLink = document.getElementById('referralLink');
+            referralLink.select();
+            referralLink.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                showNotification('Referral link copied to clipboard!', 'success');
+            } catch (err) {
+                showNotification('Failed to copy link. Please copy manually.', 'error');
+            }
+        }
+
+        // Share via WhatsApp
+        function shareViaWhatsApp() {
+            const referralLink = document.getElementById('referralLink').value;
+            const message = `Join Reddy Anna Kossu and start playing Andar Bahar! Use my referral link to get started: ${referralLink}`;
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Share on Facebook
+        function shareOnFacebook() {
+            const referralLink = document.getElementById('referralLink').value;
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`;
+            window.open(facebookUrl, '_blank');
+        }
+
+        // Share on Twitter
+        function shareOnTwitter() {
+            const referralLink = document.getElementById('referralLink').value;
+            const message = 'Join Reddy Anna Kossu and start playing Andar Bahar!';
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${encodeURIComponent(referralLink)}`;
+            window.open(twitterUrl, '_blank');
+        }
+
+        // Share on Telegram
+        function shareOnTelegram() {
+            const referralLink = document.getElementById('referralLink').value;
+            const message = `Join Reddy Anna Kossu and start playing Andar Bahar! Use my referral link: ${referralLink}`;
+            const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(message)}`;
+            window.open(telegramUrl, '_blank');
         }
 
         // Initialize user admin panel
