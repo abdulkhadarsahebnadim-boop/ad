@@ -1590,19 +1590,18 @@ html {
 
 /* Start Game Page */
 .start-game-section {
-    padding: var(--section-padding);
+    padding: 100px 20px 40px;
     background: linear-gradient(135deg, var(--primary-black) 0%, var(--accent-black) 50%, var(--purple-primary) 100%);
-    min-height: max-content;
+    min-height: 100vh;
 }
 
 .start-game-container {
-    max-width: fit-content;
-    max-height:none;
+    max-width: 1200px;
     margin: 0 auto;
     background: var(--accent-black);
-    border: 0px solid var(--gold-primary);
-    border-radius: 5px;
-    padding: 0px;
+    border: 2px solid var(--gold-primary);
+    border-radius: 15px;
+    padding: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
@@ -1643,27 +1642,27 @@ html {
 
 /* Live Stream Box */
 .live-stream-box {
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .stream-container {
     background: rgba(0, 0, 0, 0.3);
-    border: 0px solid var(--gold-primary);
-    border-radius: 5px;
-    margin-top: 8px;
+    border: 2px solid var(--gold-primary);
+    border-radius: 15px;
+    overflow: hidden;
     position: relative;
 }
 
 .stream-video {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 600px;
     background: var(--primary-black);
 }
 
 .stream-video video {
     width: 100%;
-    height: 220%;
+    height: 88%;
     margin-top: 79px;
     object-fit: cover;
 }
@@ -1760,18 +1759,19 @@ html {
 .main-betting-areas {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    gap: 0;
-    margin-bottom: 15px;
-    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: stretch;
+    min-height: 250px;
 }
 
 .betting-zone {
     padding: 20px;
-    border: none;
+    border: 2px solid rgba(255, 215, 0, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
-    height: 200px;
+    min-height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1831,6 +1831,17 @@ html {
     margin: 0;
 }
 
+.zone-label1, .zone-label2 {
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+
 .zone-odds {
     font-size: 16px;
     color: var(--white);
@@ -1860,15 +1871,15 @@ html {
 }
 
 .central-card-area {
-    width: 120px;
-    height: 200px;
+    width: 150px;
+    min-height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #2C2C2C;
     border-radius: 50%;
-    border: 2px solid var(--white);
-    margin: 0 10px;
+    border: 3px solid var(--gold-primary);
+    position: relative;
 }
 
 .central-card {
@@ -1957,10 +1968,15 @@ html {
     background: linear-gradient(135deg, #DC143C, #B22222);
 }
 .bet-amount {
-    font-size: 26px;
+    font-size: 32px;
     color: var(--gold-primary);
-    font-weight: 400;
+    font-weight: 700;
     margin-top: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    border: 2px solid var(--gold-primary);
 }
 
 #andarBet {
@@ -1981,26 +1997,22 @@ html {
 
 .andar-zone-image {
     position: absolute;
-    left: 17px;
+    left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    width: 15%;
-    max-width: 50px;
-    height: auto;
-    aspect-ratio: 1;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
     z-index: 1;
 }
 
 .bahar-zone-image {
     position: absolute;
-    right: 17px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    width: 15%;
-    max-width: 50px;
-    height: auto;
-    aspect-ratio: 1;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
     z-index: 1;
 }
@@ -2010,10 +2022,8 @@ html {
     right: 20%;
     top: 50%;
     transform: translateY(-50%);
-    width: 15%;
-    max-width: 50px;
-    height: auto;
-    aspect-ratio: 1;
+    width: 70px;
+    height: 100px;
     object-fit: contain;
     z-index: 1;
 }
@@ -2023,10 +2033,8 @@ html {
     left: 20%;
     top: 50%;
     transform: translateY(-50%);
-    width: 15%;
-    max-width: 50px;
-    height: auto;
-    aspect-ratio: 1;
+    width: 70px;
+    height: 100px;
     object-fit: contain;
     z-index: 1;
 }
@@ -2036,10 +2044,8 @@ html {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 30%;
-    max-width: 80px;
-    height: auto;
-    aspect-ratio: 1;
+    width: 90px;
+    height: 130px;
     object-fit: contain;
     z-index: 1;
 }
@@ -2109,6 +2115,14 @@ html {
 }
 
 
+.coins-container {
+    margin-bottom: 20px;
+}
+
+.chip-selection-section {
+    margin-bottom: 15px;
+}
+
 .game-controls {
     display: flex;
     justify-content: center;
@@ -2118,6 +2132,11 @@ html {
 }
 .select-coins{
     height: 68px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.select-coins:hover {
+    transform: scale(1.1);
 }
 .control-btn {
     display: flex;
@@ -2224,6 +2243,55 @@ html {
     color: var(--gold-primary);
 }
 
+/* Desktop Optimization for Start Game */
+@media (min-width: 769px) {
+    .start-game-section {
+        padding: 100px 20px 40px;
+    }
+    
+    .start-game-container {
+        max-width: 1200px;
+        padding: 30px;
+    }
+    
+    .stream-video {
+        height: 400px;
+    }
+    
+    .main-betting-areas {
+        min-height: 280px;
+        gap: 15px;
+    }
+    
+    .betting-zone {
+        min-height: 280px;
+        padding: 25px;
+    }
+    
+    .central-card-area {
+        width: 150px;
+        min-height: 280px;
+    }
+    
+    .chip-selection {
+        gap: 20px;
+    }
+    
+    .chip-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .game-controls {
+        gap: 20px;
+    }
+    
+    .control-btn {
+        padding: 18px 25px;
+        font-size: 16px;
+    }
+}
+
 @media (max-width: 768px) {
     .start-game-container {
         padding: 15px;
@@ -2235,9 +2303,9 @@ html {
         text-align: center;
     }
     
-    .stream-video {
+    /*.stream-video {
         height: 170px;
-    }
+    }*/
     
     .stream-controls {
         bottom: 10px;
@@ -2455,7 +2523,7 @@ html {
     
     .betting-container {
         padding: 10px;
-        margin-top: 300px;
+        margin-top: -22px;
         border-radius: 0;
     }
     
